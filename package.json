@@ -1,0 +1,61 @@
+{
+  "name": "tachiyomi",
+  "version": "0.0.0",
+  "main": "app/index.js",
+  "author": "Yasin Allana",
+  "description": "Tachiyomi windows client. Built with electron",
+  "license": "MIT",
+  "scripts": {
+    "start": "npm run build && npm run electron:start",
+    "dev": "concurrently -k \"vite\" \"npm run electron:dev\"",
+    "build": "vite build",
+    "preview": "vite preview",
+    "electron:dev": "cross-env IS_DEV=true electron-forge start",
+    "electron:build": "electron-forge make",
+    "electron:package": "electron-forge package"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.61",
+    "@electron-forge/maker-deb": "^6.0.0-beta.61",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.61",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
+    "@electron-forge/maker-zip": "^6.0.0-beta.61",
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.30",
+    "concurrently": "^7.0.0",
+    "cross-env": "^7.0.3",
+    "electron": "16.0.5",
+    "svelte": "^3.44.0",
+    "svelte-preprocess": "^4.10.1",
+    "vite": "^2.7.2"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "Tachiyomi"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  }
+}
