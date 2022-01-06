@@ -17,7 +17,7 @@ const createLoadingScreen = () => {
     frame: false,
     transparent: true,
     resizable: false,
-    icon: `${__dirname}/build/app_icon.png`,
+    icon: `${__dirname}/svelte-dist/electron_icon.png`,
   });
 
   loadingScreen.loadFile(`${__dirname}/loader/index.html`);
@@ -27,14 +27,17 @@ const createLoadingScreen = () => {
   });
 };
 
+// Main window
 function createWindow() {
   const mainWindow = new BrowserWindow({
-    icon: `${__dirname}/build/app_icon.png`,
     show: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
     },
+    width: 1280,
+    height: 720,
+    icon: `${__dirname}/svelte-dist/electron_icon.png`,
   });
 
   mainWindow.maximize();
@@ -54,6 +57,7 @@ function createWindow() {
   }
 }
 
+// Launch loader and main window
 function initLoaderAndMainProcess() {
   createLoadingScreen();
   createWindow();
@@ -69,6 +73,7 @@ app.whenReady().then(() => {
   });
 });
 
+// Handle closure
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();

@@ -1,7 +1,7 @@
 {
   "name": "tachiyomi",
   "version": "0.0.0",
-  "main": "app/index.js",
+  "main": "electron/index.js",
   "author": "Yasin Allana",
   "description": "Tachiyomi windows client. Built with electron",
   "license": "MIT",
