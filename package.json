@@ -28,6 +28,8 @@
     "electron": "16.0.5",
     "postcss": "^8.4.5",
     "svelte": "^3.44.0",
+    "svelte-awesome": "^2.4.2",
+    "svelte-navigator": "^3.1.5",
     "svelte-preprocess": "^4.10.1",
     "tailwindcss": "^3.0.8",
     "vite": "^2.7.2"
