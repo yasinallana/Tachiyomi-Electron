@@ -13,14 +13,14 @@ let loadingScreen;
 const createLoadingScreen = () => {
   loadingScreen = new BrowserWindow({
     width: 200,
-    height: 400,
+    height: 200,
     frame: false,
     transparent: true,
     resizable: false,
+    icon: `${__dirname}/build/app_icon.png`,
   });
 
-  loadingScreen.loadFile(path.join(__dirname, 'loader', 'index.html'));
-  // loadingScreen.loadURL(`file://${__dirname}/build/loader/index.html`);
+  loadingScreen.loadFile(`${__dirname}/loader/index.html`);
   loadingScreen.on('closed', () => (loadingScreen = null));
   loadingScreen.webContents.on('did-finish-load', () => {
     loadingScreen.show();
@@ -29,6 +29,7 @@ const createLoadingScreen = () => {
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
+    icon: `${__dirname}/build/app_icon.png`,
     show: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -55,9 +56,7 @@ function createWindow() {
 
 function initLoaderAndMainProcess() {
   createLoadingScreen();
-  setTimeout(() => {
-    createWindow();
-  }, 20000);
+  createWindow();
 }
 
 app.whenReady().then(() => {

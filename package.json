@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "npm run vite:build && npm run electron:start",
-    "dev": "concurrently -k \"vite:dev\" \"npm run electron:dev\"",
+    "dev": "concurrently -k \"yarn vite:dev\" \"yarn electron:dev\"",
     "vite:dev": "vite",
     "vite:build": "vite build",
     "vite:preview": "vite preview",
