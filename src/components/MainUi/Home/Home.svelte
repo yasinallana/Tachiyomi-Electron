@@ -1,1 +1,1 @@
-This is a home component;
+This is a home component.

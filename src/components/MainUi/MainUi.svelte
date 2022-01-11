@@ -3,7 +3,7 @@
 
   import { Route } from 'svelte-navigator';
   import Home from './Home/Home.svelte';
-  import Reading from './Reading/reading.svelte';
+  import Discover from './Discover/Discover.svelte';
   import Settings from './Settings/Settings.svelte';
 
   const routes = [
@@ -14,8 +14,8 @@
     },
     {
       id: 2,
-      path: '/reading',
-      component: Reading,
+      path: '/discover',
+      component: Discover,
     },
     {
       id: 3,
@@ -24,12 +24,6 @@
     },
   ];
 </script>
-
-Main content
-
-<br />
-<br />
-<br />
 
 {#each routes as route (route.id)}
   <Route path={route.path}>

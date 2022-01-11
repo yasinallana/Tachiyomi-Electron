@@ -1,5 +1,5 @@
 <script>
-  import { home, book, gears } from 'svelte-awesome/icons';
+  import { home, compass, gears } from 'svelte-awesome/icons';
   import NavItems from './components/NavItems.svelte';
   import appIcon from '../../assets/logo.png';
   import NavLink from '../common/NavLink.svelte';
@@ -8,23 +8,19 @@
   const routes = [
     {
       id: 1,
-      name: 'Home',
       icon: home,
       path: '/',
     },
     {
       id: 2,
-      name: 'Reading',
-      icon: book,
-      path: '/reading',
+      icon: compass,
+      path: '/discover',
     },
   ];
 </script>
 
 <div class="flex flex-col shadow-md dark:bg-slate-800">
-  <div class="flex justify-center my-2">
-    <img src={appIcon} alt="Application Icon" class="w-14 h-14" />
-  </div>
+  <img src={appIcon} alt="Application Icon" class="self-center mt-2 w-14 h-14" />
   <div class="flex flex-col justify-center flex-grow px-2">
     {#each routes as route (route.id)}
       <NavItems link={route} />
@@ -34,12 +30,11 @@
   <div class="flex justify-center">
     <NavLink
       to="/settings"
-      cssClass="flex items-center justify-center w-24 py-2 mb-2 rounded-md"
+      cssClass="mb-2 rounded-md p-3"
       activeCssClass="dark:bg-slate-900"
       inActiveCssClass="dark:bg-slate-700"
     >
-      <Icon data={gears} class="w-4 h-4 mr-2" />
-      <div>Setting</div>
+      <Icon data={gears} class="w-8 h-8" />
     </NavLink>
   </div>
 </div>

@@ -7,6 +7,8 @@
 <main class="flex flex-row w-screen h-screen dark:bg-slate-900 dark:text-white">
   <Router primary={false}>
     <Sidebar />
-    <MainUi />
+    <div class="flex-grow">
+      <MainUi />
+    </div>
   </Router>
 </main>
