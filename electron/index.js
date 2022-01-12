@@ -1,13 +1,21 @@
+const { app, BrowserWindow, ipcMain } = require('electron');
+const fs = require('fs');
 const path = require('path');
-const { app, BrowserWindow } = require('electron');
 
+/// Custom helpers
+const ipcProcessor = require('./helper/ipc-processor');
+const electronConstants = require('./helper/electron-constants');
+
+// Env Mode
 const isDev = process.env.IS_DEV === 'true';
 
 if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
+// Globals
 let loadingScreen;
+let mainWindow;
 
 // Loading screen
 const createLoadingScreen = () => {
@@ -29,11 +37,12 @@ const createLoadingScreen = () => {
 
 // Main window
 function createWindow() {
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     show: false,
     webPreferences: {
+      nodeIntegration: false,
+      contextIsolation: true,
       preload: path.join(__dirname, 'preload.js'),
-      nodeIntegration: true,
     },
     width: 1280,
     height: 720,
@@ -63,7 +72,9 @@ function initLoaderAndMainProcess() {
   createWindow();
 }
 
+// App is ready
 app.whenReady().then(() => {
+  crawlerScriptStorage();
   initLoaderAndMainProcess();
 
   app.on('activate', function () {
@@ -71,6 +82,20 @@ app.whenReady().then(() => {
       initLoaderAndMainProcess();
     }
   });
+});
+
+// Access user documents to store crawler scripts
+function crawlerScriptStorage() {
+  let crawlerStoragePath = electronConstants.crawlerStoragePath;
+
+  if (!fs.existsSync(crawlerStoragePath)) {
+    fs.mkdirSync(crawlerStoragePath, { recursive: true });
+  }
+}
+
+// IPC
+ipcMain.on('toMain', (event, args) => {
+  ipcProcessor.processIpcEvent(mainWindow, args);
 });
 
 // Handle closure
