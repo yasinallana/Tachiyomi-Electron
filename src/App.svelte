@@ -8,7 +8,7 @@
     console.log(`Received ${data} from main process`);
   });
   // @ts-ignore
-  window.api.send('toMain', { eventId: 'getCrawlers' });
+  window.api.send('toMain', { eventId: 'getActiveCrawlers' });
 </script>
 
 <main class="flex flex-row w-screen h-screen dark:bg-slate-900 dark:text-white">
