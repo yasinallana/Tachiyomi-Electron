@@ -94,7 +94,7 @@ function crawlerScriptStorage() {
 }
 
 // IPC
-ipcMain.on('launchIpcEvent', (event, args) => {
+ipcMain.on('sendIpcEvent', (event, args) => {
   ipcProcessor.processIpcEvent(mainWindow, args);
 });
 

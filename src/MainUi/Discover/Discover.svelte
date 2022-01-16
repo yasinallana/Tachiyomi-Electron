@@ -5,7 +5,3 @@
 </script>
 
 <PageTitle>Discover</PageTitle>
-
-<style>
-  /* your styles go here */
-</style>

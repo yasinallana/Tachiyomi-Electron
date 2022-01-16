@@ -14,7 +14,7 @@
     {
       id: 2,
       icon: compass,
-      path: '/discover',
+      path: 'discover',
     },
   ];
 </script>
@@ -29,7 +29,7 @@
 
   <div class="flex justify-center">
     <NavLink
-      to="/settings"
+      to="settings"
       cssClass="mb-2 rounded-md p-3"
       activeCssClass="dark:bg-slate-900"
       inActiveCssClass="dark:bg-slate-700"

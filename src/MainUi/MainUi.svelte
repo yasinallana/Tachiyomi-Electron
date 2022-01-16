@@ -14,12 +14,12 @@
     },
     {
       id: 2,
-      path: '/discover',
+      path: 'discover',
       component: Discover,
     },
     {
       id: 3,
-      path: '/settings',
+      path: 'settings/*',
       component: Settings,
     },
   ];
