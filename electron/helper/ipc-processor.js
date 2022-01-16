@@ -1,4 +1,5 @@
 const getActiveCrawlers = require('./ipc-processing/get-active-crawlers');
+const getAvailableCrawlers = require('./ipc-processing/get-available-crawlers');
 
 // Globals
 let mainWindow;
@@ -12,7 +13,8 @@ function processIpcEvent(_mainWindow, args) {
       getActiveCrawlers.activeCrawlers(mainWindow);
       break;
 
-    case 'availableCrawlers':
+    case 'getAvailableCrawlers':
+      getAvailableCrawlers.availableCrawlers(mainWindow);
       break;
 
     default:

@@ -1,5 +1,5 @@
 <script>
-  import PageTitle from '../../common/PageTitle.svelte';
+  import PageTitle from '../../components/common/PageTitle.svelte';
 
   // your script goes here
 </script>

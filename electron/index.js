@@ -62,7 +62,7 @@ function createWindow() {
     mainWindow.webContents.openDevTools();
   } else {
     mainWindow.removeMenu();
-    mainWindow.loadFile(path.join(__dirname, 'build', 'index.html'));
+    mainWindow.loadFile(`${__dirname}/svelte-dist/index.html`);
   }
 }
 
@@ -94,7 +94,7 @@ function crawlerScriptStorage() {
 }
 
 // IPC
-ipcMain.on('toMain', (event, args) => {
+ipcMain.on('launchIpcEvent', (event, args) => {
   ipcProcessor.processIpcEvent(mainWindow, args);
 });
 

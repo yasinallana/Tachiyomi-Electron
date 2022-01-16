@@ -31,7 +31,7 @@ function processFileContent(data) {
 async function processFilesList(files) {
   let processedFiles = await Promise.all(
     files.map(async (file) => {
-      let completeFilePath = path.join(electronConstants.crawlerStoragePath, file);
+      let completeFilePath = path.join(electronConstants.electronRoot, 'crawlers', file);
 
       try {
         let readerStream = await fs.readFile(completeFilePath, {
@@ -52,15 +52,17 @@ async function processFilesList(files) {
 
   return processedFiles;
 }
+
 // Get Crawlers init
-async function getActiveCrawlers(mainWindow) {
+async function getAvailableCrawlers(mainWindow) {
+  const availableCrawlersStoragePath = path.join(electronConstants.electronRoot, 'crawlers');
   try {
-    let files = await fs.readdir(electronConstants.crawlerStoragePath);
-    let activeCrawlers = await processFilesList(files);
-    mainWindow.webContents.send('receiveIpcEvent', { eventId: 'setActiveCrawlers', activeCrawlers });
+    let files = await fs.readdir(availableCrawlersStoragePath);
+    let availableCrawlers = await processFilesList(files);
+    mainWindow.webContents.send('receiveIpcEvent', { eventId: 'setAvailableCrawlers', availableCrawlers });
   } catch (e) {
     throw error('Unable to scan directory: ' + e);
   }
 }
 
-module.exports = { activeCrawlers: getActiveCrawlers };
+module.exports = { availableCrawlers: getAvailableCrawlers };
