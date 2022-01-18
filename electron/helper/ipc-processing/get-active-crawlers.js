@@ -1,6 +1,6 @@
 const { error } = require('console');
-const fs = require('fs').promises;
-const path = require('path');
+const fs = require('node:fs/promises');
+const path = require('node:path');
 
 const objectValidator = require('../common-func/object-validator');
 const electronConstants = require('../electron-constants');
@@ -40,7 +40,7 @@ async function processFilesList(files) {
 
         let processed = processFileContent(readerStream);
         if (processed != null) {
-          return processed;
+          return { file, ...processed };
         }
       } catch (e) {
         throw error(e);

@@ -1,9 +1,9 @@
 <script>
-  import { home, compass, gears } from 'svelte-awesome/icons';
-  import NavItems from './components/NavItems.svelte';
+  import Icon from 'svelte-awesome';
+  import { compass, gears, home } from 'svelte-awesome/icons';
   import appIcon from '../../assets/logo.png';
   import NavLink from '../common/NavLink.svelte';
-  import Icon from 'svelte-awesome';
+  import NavItems from './components/NavItems.svelte';
 
   const routes = [
     {

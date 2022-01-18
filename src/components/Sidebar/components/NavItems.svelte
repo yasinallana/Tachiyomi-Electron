@@ -1,6 +1,6 @@
 <script>
-  import NavLink from '../../common/NavLink.svelte';
   import Icon from 'svelte-awesome';
+  import NavLink from '../../common/NavLink.svelte';
 
   export let link = {};
 </script>
