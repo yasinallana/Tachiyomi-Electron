@@ -1,6 +1,5 @@
 <script>
   import Icon from 'svelte-awesome';
-
   import { Link } from 'svelte-navigator';
 
   export let to;
@@ -10,18 +9,6 @@
 
 <Link
   {to}
-  state={{
-    breadCrumbs: [
-      {
-        name: 'Settings',
-        path: 'settings',
-      },
-      {
-        name: linkTitle,
-        path: to,
-      },
-    ],
-  }}
   class="flex items-center justify-between px-6 py-4 transition-colors border-b last:border-b-0 hover:bg-slate-700 border-slate-700 first:rounded-t-md last:rounded-b-md"
 >
   <span class="text-2xl">{linkTitle}</span>

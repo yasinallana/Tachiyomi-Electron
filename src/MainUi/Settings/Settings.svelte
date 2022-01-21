@@ -4,7 +4,7 @@
   import Index from './Index/Index.svelte';
 </script>
 
-<Route path="/crawlers">
+<Route path="crawlers">
   <Crawlers />
 </Route>
 <Route path="/">

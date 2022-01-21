@@ -57,7 +57,10 @@ async function processFilesList(files) {
 async function getAvailableCrawlers(mainWindow) {
   const availableCrawlersStoragePath = path.join(electronConstants.electronRoot, 'crawlers');
   try {
-    let files = await fs.readdir(availableCrawlersStoragePath);
+    let activeCrawlersStorage = await fs.readdir(electronConstants.crawlerStoragePath);
+    let availableCrawlersStorage = await fs.readdir(availableCrawlersStoragePath);
+    let files = availableCrawlersStorage.filter((x) => !activeCrawlersStorage.includes(x));
+
     let availableCrawlers = await processFilesList(files);
     mainWindow.webContents.send('receiveIpcEvent', { eventId: 'setAvailableCrawlers', availableCrawlers });
   } catch (e) {
