@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, session } = require('electron');
 const fs = require('fs');
 const path = require('path');
 
@@ -20,6 +20,12 @@ let mainWindow;
 // Loading screen
 const createLoadingScreen = () => {
   loadingScreen = new BrowserWindow({
+    webPreferences: {
+      disableBlinkFeatures: 'Auxclick',
+      sandbox: true,
+      nodeIntegration: false,
+      contextIsolation: true,
+    },
     width: 200,
     height: 200,
     frame: false,
@@ -29,6 +35,10 @@ const createLoadingScreen = () => {
   });
 
   loadingScreen.loadFile(`${__dirname}/loader/index.html`);
+  loadingScreen.webContents.on('will-navigate', (event, newURL) => {
+    event.preventDefault();
+  });
+
   loadingScreen.on('closed', () => (loadingScreen = null));
   loadingScreen.webContents.on('did-finish-load', () => {
     loadingScreen.show();
@@ -40,6 +50,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     show: false,
     webPreferences: {
+      disableBlinkFeatures: 'Auxclick',
+      sandbox: true,
       nodeIntegration: false,
       contextIsolation: true,
       preload: path.join(__dirname, 'preload.js'),
@@ -55,6 +67,15 @@ function createWindow() {
       loadingScreen.close();
     }
     mainWindow.show();
+  });
+
+  // prevent navigation via middle mouse
+  mainWindow.webContents.on('will-navigate', (event, newURL) => {
+    event.preventDefault();
+  });
+
+  mainWindow.webContents.session.setPermissionRequestHandler((webContents, permission, callback) => {
+    return callback(false);
   });
 
   if (isDev) {
@@ -76,6 +97,17 @@ function initLoaderAndMainProcess() {
 app.whenReady().then(() => {
   crawlerScriptStorage();
   initLoaderAndMainProcess();
+
+  session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    callback({
+      responseHeaders: {
+        ...details.responseHeaders,
+        'Content-Security-Policy': [
+          "default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self' data:; style-src 'unsafe-inline'; base-uri 'self';form-action 'self'",
+        ],
+      },
+    });
+  });
 
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) {

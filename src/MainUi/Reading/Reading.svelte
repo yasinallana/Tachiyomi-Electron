@@ -4,4 +4,4 @@
   // your script goes here
 </script>
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Reading</PageTitle>

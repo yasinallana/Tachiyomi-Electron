@@ -39,11 +39,11 @@
   {#each breadCrumbsLinks as crumb, index}
     <Link
       to={generateParentalPath(index)}
-      class={`text-2xl text-slate-500 hover:text-slate-200 hover:underline ${
+      class={`text-2xl text-slate-500 hover:text-slate-200 hover:underline capitalize ${
         index < breadCrumbsLinks.length ? 'mr-3' : ''
       }`}>{crumb}</Link
     >
     <span class="mr-3 text-2xl font-bold text-slate-500">/</span>
   {/each}
-  <div class="text-2xl font-semibold text-white">{breadCrumbsTitular}</div>
+  <div class="text-2xl font-semibold text-white capitalize">{breadCrumbsTitular}</div>
 </div>

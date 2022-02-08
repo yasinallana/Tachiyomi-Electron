@@ -1,6 +1,6 @@
 <script>
   import Icon from 'svelte-awesome';
-  import { compass, gears, home } from 'svelte-awesome/icons';
+  import { book, compass, gears, home } from 'svelte-awesome/icons';
   import appIcon from '../../assets/logo.png';
   import NavLink from '../common/NavLink.svelte';
   import NavItems from './components/NavItems.svelte';
@@ -13,6 +13,11 @@
     },
     {
       id: 2,
+      icon: book,
+      path: 'reading',
+    },
+    {
+      id: 3,
       icon: compass,
       path: 'discover',
     },

@@ -22,7 +22,7 @@
 </script>
 
 <div
-  class="flex items-center justify-between p-2 transition-colors border-b last:border-b-0 hover:bg-slate-700 border-slate-700 first:rounded-t-md last:rounded-b-md"
+  class="flex items-center justify-between p-2 transition-colors border-b cursor-pointer last:border-b-0 hover:bg-slate-700 border-slate-700 first:rounded-t-md last:rounded-b-md"
   on:click={toggle}
 >
   <div class="flex items-center">
