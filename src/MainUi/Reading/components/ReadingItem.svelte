@@ -1,12 +1,13 @@
 <script>
   import AccordionPanel from 'src/components/common/AccordionPanel.svelte';
   import Icon from 'svelte-awesome';
-  import { refresh } from 'svelte-awesome/icons';
+  import { download, refresh } from 'svelte-awesome/icons';
 
   export let crawler = {};
 
   const crawlerRefresh = (evt) => {
-    console.log(evt);
+    // @ts-ignore
+    window.ipc.send('sendIpcEvent', { eventId: 'executeCrawler', file: crawler.file });
   };
 </script>
 
@@ -17,7 +18,7 @@
     slot="actions"
     on:click={crawlerRefresh}
   >
-    <Icon data={refresh} />
+    <Icon data={download} />
   </button>
   <!-- / Actions -->
   <!-- Main tiles-->

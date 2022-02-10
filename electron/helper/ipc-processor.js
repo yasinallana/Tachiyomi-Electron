@@ -1,6 +1,7 @@
 const getActiveCrawlers = require('./ipc-processing/get-active-crawlers');
 const getAvailableCrawlers = require('./ipc-processing/get-available-crawlers');
 const changeCrawlerStatus = require('./ipc-processing/change-crawler-status');
+const executeCrawler = require('./ipc-processing/execute-crawler');
 
 // Globals
 let mainWindow;
@@ -20,6 +21,10 @@ function processIpcEvent(_mainWindow, args) {
 
     case 'changeCrawlerStatus':
       changeCrawlerStatus.changeCrawlerStatus(mainWindow, args);
+      break;
+
+    case 'executeCrawler':
+      executeCrawler.executeCrawler(mainWindow, args);
       break;
 
     default:
