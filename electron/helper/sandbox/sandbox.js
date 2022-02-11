@@ -1,14 +1,26 @@
 const vm = require('vm');
 
-const executeCodeInSandbox = (codeToBeRun, ctx = {}) => {
-  try {
-    vm.createContext(ctx);
-    vm.runInContext(codeToBeRun, ctx);
+const executeCodeInSandbox = async (codeToBeRun, ctx = {}) => {
+  const passedContext = {
+    ...ctx,
+    console,
+  };
 
-    return ctx;
-  } catch (error) {
-    console.log(error);
-  }
+  let asyncRunner = await new Promise((resolve, reject) => {
+    vm.runInContext(
+      codeToBeRun,
+      vm.createContext({
+        ...passedContext,
+        returnResponse: resolve,
+        returnError: reject,
+      })
+    );
+  });
+
+  return {
+    passedContext,
+    sandboxResults: asyncRunner,
+  };
 };
 
 module.exports = { executeCodeInSandbox };

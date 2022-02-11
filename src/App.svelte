@@ -8,9 +8,11 @@
 
   onMount(() => {
     // @ts-ignore
-    window.ipc.send('sendIpcEvent', { eventId: 'getActiveCrawlers' });
+    // window.ipc.send('sendIpcEvent', { eventId: 'getActiveCrawlers' });
     // @ts-ignore
-    window.ipc.send('sendIpcEvent', { eventId: 'getAvailableCrawlers' });
+    // window.ipc.send('sendIpcEvent', { eventId: 'getAvailableCrawlers' });
+
+    window.ipc.send('sendIpcEvent', { eventId: 'executeCrawler' });
   });
 
   // @ts-ignore
