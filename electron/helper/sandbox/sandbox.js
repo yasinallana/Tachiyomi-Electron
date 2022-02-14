@@ -1,26 +1,44 @@
-const vm = require('vm');
+const { VM } = require('vm2');
 
-const executeCodeInSandbox = async (codeToBeRun, ctx = {}) => {
+const executeFileInSandBox = (filePath, ctx = {}) => {
   const passedContext = {
     ...ctx,
     console,
   };
 
-  let asyncRunner = await new Promise((resolve, reject) => {
-    vm.runInContext(
-      codeToBeRun,
-      vm.createContext({
-        ...passedContext,
-        returnResponse: resolve,
-        returnError: reject,
-      })
-    );
+  const vm = new VM({
+    sandbox: passedContext,
+    eval: false,
+    wasm: false,
   });
+
+  let sandboxResults = vm.runFile(filePath);
 
   return {
     passedContext,
-    sandboxResults: asyncRunner,
+    sandboxResults,
   };
 };
 
-module.exports = { executeCodeInSandbox };
+const executeCodeInSandbox = async (code, ctx = {}) => {
+  const passedContext = {
+    ...ctx,
+    console,
+  };
+
+  const vm = new VM({
+    sandbox: passedContext,
+    eval: false,
+    wasm: false,
+    allowAsync: true,
+  });
+
+  let sandboxResults = await vm.run(code);
+
+  return {
+    passedContext,
+    sandboxResults,
+  };
+};
+
+module.exports = { executeFileInSandBox, executeCodeInSandbox };
