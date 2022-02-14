@@ -3,6 +3,8 @@ const fs = require('node:fs/promises');
 const path = require('node:path');
 const sandbox = require('../sandbox/sandbox');
 const axios = require('axios').default;
+const jsdom = require('jsdom');
+const { JSDOM } = jsdom;
 
 const electronConstants = require('../electron-constants');
 
@@ -25,6 +27,7 @@ async function processFileContent(filePath, functionToRun, additionalArgs) {
           `;
         let { sandboxResults } = await sandbox.executeCodeInSandbox(functionSelfCallString, {
           axios,
+          convertToHtml: JSDOM,
         });
 
         console.log(sandboxResults);

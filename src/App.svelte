@@ -12,7 +12,7 @@
     // @ts-ignore
     // window.ipc.send('sendIpcEvent', { eventId: 'getAvailableCrawlers' });
 
-    window.ipc.send('sendIpcEvent', { eventId: 'executeCrawler' });
+    window.ipc.send('sendIpcEvent', { eventId: 'executeCrawler', file: 'mangafox.js', functionToRun: 'discover' });
   });
 
   // @ts-ignore
